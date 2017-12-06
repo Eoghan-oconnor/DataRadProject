@@ -75,5 +75,50 @@ public class CountryController {
 		}
 		return null;
 	}
+	
+	public String deleteCountry(Country country) {
+		if (sqldao != null) {
+			try {
+				sqldao.deleteCountry(country);
+				return "index";
+			} catch (MySQLIntegrityConstraintViolationException e) {
+				FacesMessage message = new FacesMessage("Error: Country ID " + country.getCode() + " not found");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return null;
+			} catch (CommunicationsException e) {
+				FacesMessage message = new FacesMessage("Error: Cannot connect to Database");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return null;
+			} catch (Exception e) {
+				FacesMessage message = new FacesMessage("Error while trying to delete Country " + country.getCode());
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return null;
+			}
+		}
+		return null;
+	}
+	
+	public String updateCountry(Country country) {
+		if (sqldao != null) {
+			try {
+				System.out.println(country);
+				sqldao.updateCountry(country);
+				return "index";
+			} catch (MySQLIntegrityConstraintViolationException e) {
+				FacesMessage message = new FacesMessage("Error: Country ID " + country.getCode() + " not found");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return null;
+			} catch (CommunicationsException e) {
+				FacesMessage message = new FacesMessage("Error: Cannot connect to Database");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return null;
+			} catch (Exception e) {
+				FacesMessage message = new FacesMessage("Error while trying to update Country " + country.getCode());
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return null;
+			}
+		}
+		return null;
+	}
 
 }

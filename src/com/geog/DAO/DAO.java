@@ -39,7 +39,7 @@ public class DAO {
 			countries.add(country);
 		}
 		return countries;
-	}//load countries
+	}//add countries
 	public void addCountry(Country country)throws Exception{
 		Connection conn = mysqlDS.getConnection();
 		PreparedStatement stmt = null;
@@ -51,6 +51,37 @@ public class DAO {
 		stmt.setString(3, country.getDetails());
 
 		stmt.execute();	
+	}
+	
+	public void deleteCountry(Country country) throws Exception {
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		//ResultSet myRs = null;
+		
+		myConn = mysqlDS.getConnection();
+		String sql = "delete from country where co_code=?";
+		myStmt = myConn.prepareStatement(sql);
+		myStmt.setString(1, country.getCode());
+		myStmt.execute();
+	}
+
+	
+	public void updateCountry(Country country) throws Exception {
+		
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+		
+		myConn = mysqlDS.getConnection();
+		String sql = "UPDATE COUNTRY SET co_name=?, co_details=? WHERE co_code=?";
+		
+		myStmt = myConn.prepareStatement(sql);
+		myStmt.setString(3, country.getCode());
+		myStmt.setString(1, country.getName());
+		myStmt.setString(2, country.getDetails());
+		myStmt.execute();		
+		
+		
 	}
 	
 	public ArrayList<Region> loadRegion() throws SQLException{

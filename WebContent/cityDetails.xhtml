@@ -9,19 +9,19 @@
 
 <h:body>
 	<h1>Full City Details</h1>
-	City Code: #{cityController.selected.code}
+	City Code: #{cityController.details.code}
 	<br/>
-	City Name:#{cityController.selected.name}
+	City Name:#{cityController.details	.name}
 	<br/>
-	Country: #{cityController.selected.countryName}
+	Country: #{cityController.details.countryName}
 	<br/>
-	Region: #{cityController.selected.regCode}
+	Region: #{cityController.details.regCode}
 	<br/>
-	City Population: #{cityController.selected.population}
+	City Population: #{cityController.details.population}
 	<br/>
-	By The Sea: #{cityController.selected.isCoastal}
+	By The Sea: #{cityController.details.isCoastal}
 	<br/>
-	Area (KM): #{cityController.selected.areaKm}
+	Area (KM): #{cityController.details.areaKm}
 	<br/>
 	<h:link value="home" outcome="index"/>
 	<h:link value="cities" outcome="cities"/>

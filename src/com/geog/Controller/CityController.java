@@ -18,7 +18,7 @@ public class CityController {
 	
 	private DAO sqldao;
 	ArrayList<City> cities;
-	private City details;
+	//private City details;
 	
 	public CityController() throws Exception{
 		super();
@@ -55,7 +55,7 @@ public class CityController {
 		}
 	}
 	
-	public String getDetailsFor(City city) {
+	/*public String getDetailsFor(City city) {
 		this.details = city;
 		return null;
 		
@@ -68,7 +68,7 @@ public class CityController {
 	public void setSelected(City details) {
 		this.details = details;
 	}
-	
+	*/
 	//add city
 	public String addCity(City city){
 		if(sqldao != null){
