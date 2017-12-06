@@ -2,14 +2,14 @@ package com.geog.DAO;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.geog.Model.City;
 import com.geog.Model.Country;
 import com.geog.Model.Region;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+//import java.sql.ResultSet;
+//import java.sql.SQLException;
+//import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.naming.Context;
@@ -76,21 +76,55 @@ public class DAO {
 		PreparedStatement stmt = null;
 		
 		String sql = "insert into region values (?, ? , ?,?)";
-		stmt = conn.prepareStatement(sql);
-		stmt = setString(1, region.getCode());
-		stmt = setString(2, region.getRegCode());
-		stmt = setString(3, region.getRegName());
-		stmt = setString(4, region.getRegDetails());
-		
+		stmt =conn.prepareStatement(sql);
+		stmt.setString(1, region.getCode());
+		stmt.setString(2, region.getRegCode());
+		stmt.setString(3, region.getRegName());
+		stmt.setString(4, region.getRegDetails());
 		stmt.execute();
-		
-	}
-
-
-	private PreparedStatement setString(int i, String code) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
+	public ArrayList<City> loadCity() throws SQLException{
+		
+		Connection conn = mysqlDS.getConnection();
+		final Statement stmt = conn.createStatement();
+		final ResultSet rs = stmt.executeQuery("SELECT * FROM city");
+		final ArrayList<City> cities = new ArrayList<City>();
+		
+		
+		while(rs.next()){
+			
+			final City city = new City();
+			city.setCode(rs.getString("cty_code"));
+			city.setAreaKm(rs.getDouble("areaKM"));
+			city.setIsCoastal(rs.getBoolean("isCoastal"));
+			city.setCountryCode(rs.getString("co_code"));
+			city.setName(rs.getString("cty_name"));
+			city.setPopulation(rs.getLong("population"));
+			city.setRegCode(rs.getString("reg_code"));
+			cities.add(city);
+		}
+		return cities;	
+	}
+	
+	public void addCity (City city) throws Exception{
+		
+		Connection conn = mysqlDS.getConnection();
+		PreparedStatement stmt = null;
+		
+		String sql = "insert into city values (?, ? , ? , ? , ? , ? , ? )";
+		stmt = conn.prepareStatement(sql);
+		
+		stmt.setString(1, city.getCode());
+		stmt.setString(2, city.getCountryCode());
+		stmt.setString(3, city.getRegCode());
+		stmt.setString(4, city.getName());
+		stmt.setFloat(5, city.getPopulation());
+		stmt.setString(6, city.getIsCoastal() ? "true" : "false");
+		stmt.setDouble(7, city.getAreaKm());
+		stmt.execute();
+		
+		
+	}
 	
 }//SQLDAO

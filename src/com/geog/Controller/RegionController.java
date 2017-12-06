@@ -52,6 +52,28 @@ public class RegionController {
 			}
 		}
 	}
+	//add region
+	public String addRegion(Region region){
+		if(sqldao != null){
+			try{
+				sqldao.addRegion(region);
+				return "index";
+			} catch (MySQLIntegrityConstraintViolationException e){
+				FacesMessage message = new FacesMessage("Error: Country Code " + region.getCode() + " already exists");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return null;	
+			} catch(CommunicationsException e){
+				FacesMessage message = new FacesMessage("Error: Cannot connect to Database");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return null;
+			}catch(Exception e){
+				FacesMessage message = new FacesMessage("Error while trying to insert Country " +  region.getCode());
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return null;
+			}
+		}
+		return null;
+	}
 	
 	
 	

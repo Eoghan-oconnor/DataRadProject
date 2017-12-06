@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Add City</title>
+</h:head>
+
+<h:body>
+	<h:messages globalOnly="true" style="color:red;"/>
+	<h2>Add City</h2>
+	<h:form id="cityform">
+	    City Code: <h:inputText value="#{city.code}" />
+		<h:message class="error" for="noCityCode" id="noCityCode" style="color:red;" />
+		<br />
+	    Country Code: <h:inputText value="#{city.countryCode}" />
+		<h:message class="error" for="noCountryCode" id="noCountryCode" style="color:red;" />
+		<br />
+	    Region Code: <h:inputText value="#{city.regCode}" />
+		<h:message class="error" for="noRegCode" id="noRegCode" style="color:red;" />
+		<br />
+	    Name: <h:inputText value="#{city.name}" />
+		<h:message class="error" for="noName" id="noName" style="color:red;"/>
+		<br />
+	    Population: <h:inputText value="#{city.population}" />
+		<br />
+	    By the Sea: <h:selectOneMenu>
+			<f:selectItem itemValue="true" itemLabel="True" />
+			<f:selectItem itemValue="false" itemLabel="False" />
+		</h:selectOneMenu>
+		<br />
+	    Area KM: <h:inputText value="#{city.areaKm}" />
+		<br />
+		<h:commandButton value="Add" action="#{cityController.addCity(city)}"></h:commandButton>
+	</h:form>
+	<h:link value="home" outcome="index" />
+	<br />
+	<h:link value="back" outcome="cities" />
+
+</h:body>
+</html>

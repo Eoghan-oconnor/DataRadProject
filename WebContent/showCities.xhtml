@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:metadata>
+	<f:event type="preRenderView"
+		listener="#{cityController.loadCities()}" />
+</f:metadata>
+<h:outputStylesheet library="css" name="tables.css"  />
+<h:head>
+	<title>List Countries</title>
+</h:head>
+<h:body>
+	<p>This is the list countries page</p>
+	<br/>
+	<h:button value="Add City" outcome="addCity"/>
+	<br/>
+	<!--The Facet tag registers a named facet on the component associated with the enclosing tag.
+	 A facet represents a named section within a container component.-->
+<h:dataTable value="#{cityController.cities}" var="city" border="2"
+		styleClass="table" headerClass="table-header"
+		rowClasses="table-odd-row,table-even-row">
+		<f:metadata>
+			<f:event type="preRenderView"
+				listener="#{cityController.loadCities()}" />
+		</f:metadata>
+		<h:column>
+			<f:facet name="header">City Code</f:facet>
+         #{city.code}
+      </h:column>
+		<h:column>
+			<f:facet name="header">Country Code</f:facet>
+         #{city.countryCode}
+      </h:column>
+		<h:column>
+			<f:facet name="header">Region Code</f:facet>
+         #{city.regCode}
+      </h:column>
+		<h:column>
+			<f:facet name="header">City Name</f:facet>
+         #{city.name}
+      </h:column>
+		<h:column>
+			<f:facet name="header">Population</f:facet>
+         #{city.population}
+      </h:column>
+		<h:column>
+			<f:facet name="header">By the Sea</f:facet>
+         #{city.isCoastal}
+      </h:column>
+		<h:column>
+			<f:facet name="header">Area</f:facet>
+         #{city.areaKm}
+      </h:column>
+		<h:column>
+			<h:form>
+				<h:commandLink value="All Details"
+					action="#{cityController.getDetailsFor(city)}"
+					outcome = "cityDetails" />
+			</h:form>
+		</h:column>
+	</h:dataTable>
+	<h:link value="Back To Homepage" outcome="index" />
+</h:body>
+</html>
