@@ -27,7 +27,12 @@ public class MongoDao {
 			
 			final MongoCollection<Document> headsOfStateCollection  = db.getCollection("headsOfState");
 			final FindIterable<Document> hos = headsOfStateCollection.find();
-			
+			final Gson gson = new Gson();
+			final ArrayList<HeadOfState> headsOfState = new ArrayList<>();
+			for(Document doc : hos){
+				HeadOfState h = gson.fromJson(doc.toJson(), HeadOfState.class);
+				headsOfState.add(h);
+			}
 			
 			
 			

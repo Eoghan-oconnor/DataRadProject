@@ -34,7 +34,7 @@ public class HeadOfStateController {
 	}
 	
 	public void loadHeadOfState(){
-		this.headOfState = mongoDb.getHeadOfState();
+		this.headsOfState = mongodb.getHeadsOfState();
 	}
 	
 	
