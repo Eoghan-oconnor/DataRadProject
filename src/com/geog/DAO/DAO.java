@@ -49,24 +49,24 @@ public class DAO {
 		stmt.setString(1, country.getCode());
 		stmt.setString(2, country.getName());
 		stmt.setString(3, country.getDetails());
-
+		
 		stmt.execute();	
 	}
 	
 	public void deleteCountry(Country country) throws Exception {
-		Connection myConn = mysqlDS.getConnection();
-		PreparedStatement myStmt = null;
+		Connection conn = mysqlDS.getConnection();
+		PreparedStatement stmt = null;
 		ResultSet myRs = null;
 		
 		 
 		String sql = "DELETE FROM country WHERE co_code = ?";
-		myStmt = myConn.prepareStatement(sql);
-		myStmt.setString(1, country.getCode());
-		myStmt.execute();
+		stmt = conn.prepareStatement(sql);
+		stmt.setString(1, country.getCode());
+		stmt.execute();
 	}
 
 	
-	public void updateCountry(final Country country) throws Exception {
+	public void updateCountry(Country country) throws Exception {
 		
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
