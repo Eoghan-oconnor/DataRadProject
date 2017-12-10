@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Heads of State</title>
+</h:head>
+
+<h:body>
+	<h:outputStylesheet library="css" name="tables.css" />
+	<h:button outcome="add_head_of_state.xhtml" value="Add Head of State"></h:button>
+
+	<h:dataTable value="#{headOfStateController.headsOfState}" var="hos"
+		border="2" styleClass="table" headerClass="table-header"
+		rowClasses="table-odd-row,table-even-row">
+		<f:metadata>
+			<f:event type="preRenderView"
+				listener="#{headOfStateController.loadHeadOfState()}" />
+		</f:metadata>
+		<h:column>
+			<f:facet name="header">Country Code</f:facet>
+         #{hos._id}
+      </h:column>
+		<h:column>
+			<f:facet name="header">Head of State</f:facet>
+         #{hos.headOfState}
+      </h:column>
+
+		<h:column>
+			<h:form>
+				<h:commandLink value="Delete"
+					action="#{headOfStateController.delete(hos)}" />
+			</h:form>
+		</h:column>
+
+	</h:dataTable>
+
+	<h:link value="home" outcome="index" />
+</h:body>
+</html>

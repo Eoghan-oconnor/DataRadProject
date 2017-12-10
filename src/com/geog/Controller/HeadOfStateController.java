@@ -21,7 +21,7 @@ public class HeadOfStateController {
 	
 	private MongoDao mongodb;
 	private DAO sqlDb;
-	private ArrayList<HeadOfState> headsOfState;
+	private List<HeadOfState> headsOfState;
 	
 	public HeadOfStateController() {
 		mongodb = new MongoDao();
@@ -33,6 +33,15 @@ public class HeadOfStateController {
 		}
 	}
 	
+	
+	public List<HeadOfState> getHeadsOfState() {
+		return headsOfState;
+	}
+
+	public void setHeadsOfState(List<HeadOfState> headsOfState) {
+		this.headsOfState = headsOfState;
+	}
+
 	public void loadHeadOfState(){
 		this.headsOfState = mongodb.getHeadsOfState();
 	}

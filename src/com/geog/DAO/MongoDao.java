@@ -19,13 +19,13 @@ public class MongoDao {
 		public MongoDao() {
 			
 		mongoClient = new MongoClient();
-		db = mongoClient.getDatabase("headOfStateDB");
+		db = mongoClient.getDatabase("headsofStateDB");
 		}
 		
 		
 		public ArrayList<HeadOfState> getHeadsOfState(){
 			
-			final MongoCollection<Document> headsOfStateCollection  = db.getCollection("headsOfState");
+			final MongoCollection<Document> headsOfStateCollection  = db.getCollection("headofStateDB");
 			final FindIterable<Document> hos = headsOfStateCollection.find();
 			final Gson gson = new Gson();
 			final ArrayList<HeadOfState> headsOfState = new ArrayList<>();
