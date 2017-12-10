@@ -33,12 +33,28 @@ public class MongoDao {
 				HeadOfState h = gson.fromJson(doc.toJson(), HeadOfState.class);
 				headsOfState.add(h);
 			}
-			
-			
-			
-			
-			
 			return headsOfState;
-			
 		}
+		
+		//this method deletes a head of state from the mongo database
+	    public String delete(final HeadOfState hos) {
+	        //get the collection from the db
+	        MongoCollection<Document> headsOfStateCollection = db.getCollection("headofStateDB");
+	        //delete the head of state given the id to find it
+	        headsOfStateCollection.deleteOne(new Document("_id", hos.get_id()));
+	        return "head_of_state";
+	    }
+	    //Add a head of state to the Database
+	    public String add(final HeadOfState hos) {
+	        //get the collection from the db
+	        MongoCollection<Document> headsOfStateCollection = db.getCollection("headofStateDB");
+	        //Create a new doc for new head of state
+	        Document doc = new Document();
+	        //append it to the doc
+	        doc.append("_id", hos.get_id());
+	        doc.append("headOfState", hos.getHeadOfState());
+	        //insert it into the DB
+	        headsOfStateCollection.insertOne(doc);
+	        return "head_of_state";
+	    }
 }
